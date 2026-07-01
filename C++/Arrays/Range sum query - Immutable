@@ -5,7 +5,7 @@ class NumArray {
 public:
     NumArray(vector<int>& nums) {
        arr=nums; 
-        
+      
     }
     
     int sumRange(int left, int right) {
