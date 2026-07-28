@@ -1,0 +1,43 @@
+//Optimal one(Prefix & Suffix approach)
+
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int prefix = 1;
+        int suffix = 1;
+        int ans = INT_MIN;
+
+        for(int i = 0; i < nums.size(); i++) {
+
+            if(prefix == 0) prefix = 1;
+            if(suffix == 0) suffix = 1;
+
+            prefix *= nums[i];
+            suffix *= nums[nums.size()-1-i];
+
+            ans = max(ans, max(prefix, suffix));
+        }
+
+        return ans;
+    }
+};
+
+//Optimal one(Min & Max approach)
+
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int currpro=nums[0];
+        int maxpro=nums[0];
+        int minpro=nums[0];
+    
+        for(int i=1;i<nums.size();i++){
+           int tempmax=currpro;
+            currpro=max(nums[i],max(currpro*nums[i],minpro*nums[i]));
+            minpro=min(nums[i],min(tempmax*nums[i],minpro*nums[i]));
+            maxpro=max(currpro,maxpro);
+        }
+        
+      return maxpro;  
+    }
+};
