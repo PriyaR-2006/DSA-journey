@@ -1,0 +1,37 @@
+//Better solution(O(n),O(n))
+
+class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+       unordered_map<int,int> arr;
+        for(int i=0;i<nums.size();i++){
+           if(arr.count(nums[i]))
+            {
+               if((i- arr[nums[i]])<=k)
+                 return true;
+               
+            }
+            arr[nums[i]]= i;
+        }
+        return false;
+    }
+};
+
+//optimal(O(n),O(min(n,k)))
+
+class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+        unordered_set<int> window;
+        for (int i = 0; i < nums.size(); i++) {
+            if (i > k)
+                window.erase(nums[i - k - 1]);
+                
+            if (window.count(nums[i]))
+                return true;
+
+            window.insert(nums[i]);
+        }
+        return false;
+    }
+};
