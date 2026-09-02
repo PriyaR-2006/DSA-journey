@@ -1,0 +1,46 @@
+//Better(O(n^2))
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        for(int i=0;i<s.length();i++){
+            s[i]= tolower(s[i]);
+            if(!isalnum(s[i])){
+                s.erase(i,1);
+                i--;
+            }  
+        }
+        string rev= s;
+        reverse(s.begin(),s.end());
+        if(s== rev)
+            return true;
+        else 
+            return false;
+    }
+};
+
+//Optimal(O(n))
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+    int left = 0;
+    int right = s.length() - 1;
+
+    while (left < right) {
+        while (left < right && !isalnum(s[left]))
+            left++;
+
+        while (left < right && !isalnum(s[right]))
+            right--;
+
+        if (tolower(s[left]) != tolower(s[right]))
+            return false;
+
+        left++;
+        right--;
+    }
+
+    return true;
+}
+};
